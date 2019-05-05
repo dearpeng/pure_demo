@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--打印到控制台,输出目的地-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--控制台输出格式-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{32}.%M:%L %msg%n</pattern>
+            <immediateFlush>false</immediateFlush>
+        </encoder>
+    </appender>
+
+    <!--日志输出到文件-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--如果只是想要 Info 级别的日志，只是过滤 info 还是会输出 Error 日志，因为 Error 的级别高，
+   所以我们使用下面的策略，可以避免输出 Error 的日志-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+            <!--过滤 Error-->
+            <!--<level>ERROR</level>-->
+            <!--匹配到就禁止-->
+            <!--<onMatch>DENY</onMatch>-->
+            <!--没有匹配到就允许-->
+            <!--<onMismatch>ACCEPT</onMismatch>-->
+        <!--</filter>-->
+
+        <!--如果只是想要 Error 级别的日志，那么需要过滤一下，默认是 info 级别的，ThresholdFilter-->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>Error</level>
+        </filter>-->
+
+        <!--输出的地址-->
+        <file>D:/files/logs/server/logs.log</file>
+        <Append>true</Append>
+        <!--设置日志不要都在一个文件的分隔策略-->
+        <!--日志名称，如果没有File 属性，那么只会使用FileNamePattern的文件路径规则
+            如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天
+            的日志改名为今天的日期。即，<File> 的日志都是当天的。
+        -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--这样写会压缩-->
+            <fileNamePattern>D:/files/logs/server/bak/logs.%d{yyyy-MM-dd-HH}.log.zip</fileNamePattern>
+            <!-- 保持历史15天的日志,否则删除旧日志 -->
+            <maxHistory>15</maxHistory>
+            <!--保存最大日志大小,否则删除旧日志-->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <!--日志文件格式-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>utf-8</charset>
+            <ImmediateFlush>true</ImmediateFlush>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{32}.%M:%L %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--日志根级别,这个要放在appender后面,不然会报找不到appender-->
+    <root level="info">
+        <!--引用哪个appender就会使用哪个日志输出策略-->
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+</configuration>
