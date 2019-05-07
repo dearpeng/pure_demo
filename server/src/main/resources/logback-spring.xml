@@ -106,7 +106,7 @@
         <!--文件地址和名称-->
         <file>${filePath}/log_debug.log</file>
 
-        <!--分开日志的策略-->
+        <!--分开日志的策略,根据fileNamePattern中的yyyy-MM-dd这样来标识打包时间-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--这样写会压缩-->
             <fileNamePattern>D:/files/logs/server/bak/log_debug.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
