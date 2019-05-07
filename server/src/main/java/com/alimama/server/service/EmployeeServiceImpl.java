@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public List<Employee> getAllEmployee() {
-//        System.out.println(100/0);
+        System.out.println(100/0);
         return employeeMapper.selectByExample(new EmployeeExample());
     }
 }

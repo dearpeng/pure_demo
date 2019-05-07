@@ -3,7 +3,7 @@
 
 
     <!--设置公用的属性-->
-    <property name="filePath" value="D:/files/logs/server"/>
+    <property name="filePath" value="D:/files/logs/web"/>
     <property name="infoLevel" value="info"/>
     <property name="errorLevel" value="error"/>
     <property name="debugLevel" value="debug"/>
@@ -136,7 +136,7 @@
         <appender-ref ref="file"/>-->
     </root>
 
-    <!--不同环境使用不同的日志,开发,测试-->
+    <!--不同环境使用不同的日志,开发,测试dev,test对应的是application-xxx.properties-->
     <springProfile name="dev,test">
         <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<appender>。<loger>仅有一个name属性，一个可选的level和一个可选的addtivity属性。
