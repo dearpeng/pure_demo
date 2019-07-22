@@ -3,6 +3,7 @@ package com.alimama.server;
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
@@ -10,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
 @ImportResource(locations = {"classpath*:spring/application.xml"})
+@EnableCaching//启用注解
 public class ServerApplication {
 
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class ServerApplication {
         System.out.println("*****************服务提供启动完成*************");
     }
 
-   /* @Configuration
+   /* @Configurationspring-boot-starter-data-redis
     @EnableDubbo(scanBasePackages = "com.alimama.server")
     @PropertySource("classpath:/application.properties")
     static public class ProviderConfiguration {

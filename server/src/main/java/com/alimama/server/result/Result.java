@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * 车盛通用返回结果
  *
- * @author matisun
+ * @author
  * @date 2019/3/9 17:42
  */
 public interface Result<T> extends Serializable {

@@ -1,7 +1,7 @@
 package com.alimama.server.result;
 
 /**
- * @author matisun
+ * @author
  * @date 2019/3/9 17:43
  */
 public enum BaseResultCode implements ResultCode{

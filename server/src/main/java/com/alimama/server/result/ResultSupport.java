@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author matisun
+ * @author
  * @date 2019/3/9 17:48
  */
 public class ResultSupport<T> implements Result<T> {
