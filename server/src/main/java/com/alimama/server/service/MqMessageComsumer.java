@@ -1,9 +1,12 @@
 package com.alimama.server.service;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
 import java.io.Serializable;
 
 /**
@@ -18,20 +21,32 @@ public class MqMessageComsumer {
      * 监听和读取消息
      */
     @JmsListener(destination = "cheguo.queues.loan.test",containerFactory = "jmsListenerContainerTopic")
-    public void messageComsumer(String message) {
-        System.out.println("===============================================");
-        System.out.println("接受到1：" + message);
-        System.out.println("===============================================");
-        //TODO something
+    public void messageComsumer(TextMessage message) {
+        try {
+            System.out.println("===============================================");
+            System.out.println("接受到1：" +  message.getText());
+            System.out.println("===============================================");
+            //客户端手动签收消息
+            message.acknowledge();
+            //TODO something
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
     /*
      * 监听和读取消息,只接受queue消息
      */
     @JmsListener(destination = "cheguo.queues.loan.test",containerFactory = "jmsListenerContainerQueue")
-    public void messageComsumer1(String message) {
-        System.out.println("===============================================");
-        System.out.println("接受到2：" + message);
-        System.out.println("===============================================");
+    public void messageComsumer1(TextMessage message) {
+        try {
+            System.out.println("===============================================");
+            System.out.println("接受到2：" + message.getText());
+            System.out.println("===============================================");
+            //客户端手动签收消息
+            message.acknowledge();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
         //TODO something
     }
 
