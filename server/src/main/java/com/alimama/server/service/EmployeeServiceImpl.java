@@ -5,6 +5,7 @@ import com.alimama.api.model.EmployeeExample;
 import com.alimama.api.service.IEmployeeService;
 import com.alimama.server.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Override
+    @Cacheable(value = "employeeListCache",keyGenerator = "keyGenerator")
     public List<Employee> getAllEmployee() {
-        return employeeMapper.selectByExample(new EmployeeExample());
+        List<Employee> employees = employeeMapper.selectByExample(new EmployeeExample());
+        return employees;
     }
 }
